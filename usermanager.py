@@ -1,3 +1,6 @@
+import subprocess
+
+
 class UserManager():
     def __init__(self):
         global ops_map
@@ -24,8 +27,18 @@ class UserManager():
             Enter choice: ''').strip().lower()[0]]
 
     def create(self):
-        print "createing"
-        pass
+        username = raw_input('Username:')
+        uid = raw_input('Uid:')
+        group = raw_input('Group:')
+        groups = raw_input('Supplementary groups[group1,group2...]:')
+        homedir = raw_input('HomeDir:')
+        exe_code = subprocess.call(['useradd -u %s -g %s -G %s -d %s -m %s'
+                                    %(uid, group, groups, homedir, username)], shell=True)
+        # print exe_code
+        if not exe_code:
+            print 'MSG:User %s create success.' %(username)
+        else:
+            print 'Error:User %s create fail.' %(username)
 
     def delete(self):
         print "deleteing"

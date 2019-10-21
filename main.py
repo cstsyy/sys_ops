@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 #
-from UserManager import UserManager
+from usermanager import UserManager
 
 ops_obj_map = {
     'u': 'UserManager',
+    'g': 'GroupManager',
     'f': 'FSManager',
     'n': 'NetworkManager',
     's': 'ServiceManager',
@@ -15,7 +16,8 @@ def ops_obj_choice():
     return ops_obj_map[raw_input('''
     Choose a operation:
 
-    (U)ser Managerment
+    (U)ser Management
+    (G)roup Management
     (F)ilesystem Management
     (N)etwork Management
     (S)ervices Management
@@ -28,8 +30,9 @@ def ops_exec(ops_obj):
     # Turn str obj to object
     ops_obj = eval(ops_obj)()
     ops = ops_obj.ops_choice()
-    ops = 'ops_obj' +'.' + ops
+    ops = 'ops_obj' + '.' + ops
     eval(ops)()
+
 
 if __name__ == '__main__':
     ops_obj = ops_obj_choice()
