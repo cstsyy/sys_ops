@@ -32,9 +32,19 @@ class UserManager():
         group = raw_input('Group:')
         groups = raw_input('Supplementary groups[group1,group2...]:')
         homedir = raw_input('HomeDir:')
-        exe_code = subprocess.call(['useradd -u %s -g %s -G %s -d %s -m %s'
-                                    %(uid, group, groups, homedir, username)], shell=True)
-        # print exe_code
+        createflag = raw_input('Create homedir?[Y/N]')
+        cmd = 'useradd {optu} {uid} {optg} {group} {optG} {groups} {optd} {homedir} {createflag} {username}'.format(
+            optu='-u' if uid else '', uid=uid,
+            optg='-g' if group else '', group=group,
+            optG='-G' if groups else '', groups=groups,
+            optd='-d' if homedir else '', homedir=homedir,
+            createflag='-m' if createflag.lower() == 'y' else '',
+            username=username
+        )
+        cmd = ' '.join(cmd.split())
+        # print cmd
+        exe_code = subprocess.call([cmd], shell=True)
+        print exe_code
         if not exe_code:
             print 'MSG:User %s create success.' %(username)
         else:
