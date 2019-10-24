@@ -1,4 +1,4 @@
-class FSManager():
+class NetworkManager():
     def __init__(self):
         global ops_map
         ops_map = {
