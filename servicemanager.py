@@ -1,18 +1,16 @@
-class ServiceManager():
-    def __init__(self):
-        global ops_map
-        ops_map = {
-            's': 'start',
-            'p': 'stop',
-            'v': 'view',
-            'e': 'enable',
-            'd': 'disable',
-            'r': 'return',
-            'q': 'quit'
-        }
+from manager import Manager
 
-    def ops_choice(self):
-        return ops_map[raw_input('''
+
+class ServiceManager(Manager):
+    def __init__(self):
+        svc_ops_map = {
+            's': self.start,
+            'p': self.stop,
+            'e': self.enable,
+            'd': self.disable,
+        }
+        super(ServiceManager, self).__init__(**svc_ops_map)
+        self.menu = '''
             Choose a operation:
 
             (S)tart Service
@@ -23,4 +21,19 @@ class ServiceManager():
             (R)eturn
             (Q)uit
 
-            Enter choice:''').strip().lower()[0]]
+            Enter choice:'''
+
+    def start(self):
+        pass
+
+    def stop(self):
+        pass
+
+    def view(self):
+        pass
+
+    def enable(self):
+        pass
+
+    def disable(self):
+        pass

@@ -1,24 +1,34 @@
-class GroupManager():
+from manager import Manager
+
+
+class GroupManager(Manager):
     def __init__(self):
-        global ops_map
-        ops_map = {
-            'c': 'create',
-            'd': 'delete',
-            'v': 'view',
-            'm': 'modify',
-            'r': 'return',
-            'q': 'quit'
+        group_ops_map = {
+            'c': self.create,
+            'd': self.delete,
+            'm': self.modify
         }
+        super(GroupManager, self).__init__(**group_ops_map)
+        self.menu = '''
+                Choose a operation:
+    
+                (C)reate Group
+                (D)elete Group
+                (V)iew Group
+                (M)odify Group
+                (R)eturn
+                (Q)uit
+    
+                Enter choice: '''
 
-    def ops_choice(self):
-        return ops_map[raw_input('''
-            Choose a operation:
+    def create(self):
+        pass
 
-            (C)reate Group
-            (D)elete Group
-            (V)iew Group
-            (M)odify Group
-            (R)eturn
-            (Q)uit
+    def delete(self):
+        pass
 
-            Enter choice: ''').strip().lower()[0]]
+    def view(self):
+        pass
+
+    def modify(self):
+        pass

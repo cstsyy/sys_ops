@@ -1,17 +1,17 @@
-class NetworkManager():
+from manager import Manager
+
+
+class NetworkManager(Manager):
     def __init__(self):
-        global ops_map
-        ops_map = {
+        self.ops_map = {
             'c': 'create',
             'd': 'delete',
             'v': 'view',
             'm': 'modify',
-            'r': 'return',
-            'q': 'quit'
+            'r': 'up_return',
+            'q': self.quit_menu
         }
-
-    def ops_choice(self):
-        return ops_map[raw_input('''
+        self.menu = '''
             Choose a operation:
 
             (C)reate Configuration file
@@ -21,4 +21,4 @@ class NetworkManager():
             (R)eturn
             (Q)uit
 
-            Enter choice:''').strip().lower()[0]]
+            Enter choice:'''

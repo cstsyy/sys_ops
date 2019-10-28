@@ -1,6 +1,6 @@
 #!/usr/bin/env ptyon
 #
-import sys
+# import sys
 from manager import Manager
 from usermanager import UserManager
 from groupmanager import GroupManager
@@ -45,7 +45,8 @@ class SysManager(Manager):
             try:
                 ops_obj = self.ops_obj_map.get(choice)()
                 return  ops_obj
-            except Exception:
+            except Exception as e:
+                print e
                 print 'Bad choice, try again.'
 
     # def quit_menu(self):
@@ -55,4 +56,4 @@ if __name__ == '__main__':
     mgr_obj = SysManager()
     while True:
         ops_obj = mgr_obj.get_obj()
-        ops_obj.exe_ops()
+        ops_obj.exe_ops(ops_obj.menu, ops_obj.ops_map)

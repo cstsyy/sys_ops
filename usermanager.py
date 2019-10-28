@@ -3,14 +3,20 @@ from manager import Manager
 
 class UserManager(Manager):
     def __init__(self):
-        self.ops_map = {
+        user_ops_map = {
             'c': self.create,
             'd': self.delete,
-            'v': self.view,
-            'm': self.modify,
-            'r': 'up_return',
-            'q': self.quit_menu
+            'm': self.modify
         }
+        super(UserManager, self).__init__(**user_ops_map)
+        # self.ops_map = {
+        #     'c': self.create,
+        #     'd': self.delete,
+        #     'v': self.view,
+        #     'm': self.modify,
+        #     'r': 'up_return',
+        #     'q': self.quit_menu
+        # }
         self.menu = '''Choose a operation:
 
             (C)reate User
@@ -78,12 +84,14 @@ class UserManager(Manager):
         )
         cmd = ' '.join(cmd.split())
         # print cmd
-        exe_code = self.cmd_exe(cmd)
-        print exe_code
-        if not exe_code:
-            print 'MSG:User %s create success.' %(username)
-        else:
-            print 'Error:User %s create fail.' %(username)
+        return self.cmd_exe(cmd,
+                                'MSG:User %s create success.' %(username),
+                                'Error:User %s create fail.' %(username))
+        # print exe_code
+        # if not exe_code:
+        #     print 'MSG:User %s create success.' %(username)
+        # else:
+        #     print 'Error:User %s create fail.' %(username)
 
     def delete(self):
         username = raw_input('Username:')
