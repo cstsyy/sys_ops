@@ -22,13 +22,39 @@ class GroupManager(Manager):
                 Enter choice: '''
 
     def create(self):
-        pass
+        groupname = raw_input('Group name:')
+        gid = raw_input('Gid[Press Enter for default]:')
+        cmd = 'groupadd {optg} {gid} {groupname}'.format(
+            optg='-g' if gid else '', gid=gid, groupname=groupname
+        )
+        cmd = ' '.join(cmd.split())
+        return self.cmd_exe(cmd,
+                     'MSG:Group %s create succeed.' %(groupname),
+                     'Error:Group %s create failed.' %(groupname))
 
     def delete(self):
-        pass
+        groupname = raw_input('Group name:')
+        cmd = 'groupdel {groupname}'.format(groupname=groupname)
+        return self.cmd_exe(cmd,
+                            'MSG:Group %s delete succeed.' %(groupname),
+                            'Error:Group %s delete failed.' %(groupname))
 
     def view(self):
-        pass
+        groupname = raw_input('Group name:')
+        cmd = 'cat /etc/group | grep ^{groupname}:'.format(groupname=groupname)
+        return self.cmd_exe(cmd,
+                            'MSG:Group %s view succeed.' % (groupname),
+                            'Error:Group %s view failed.' % (groupname))
 
     def modify(self):
-        pass
+        groupname = raw_input('Group name[Press Enter for default]:')
+        newname = raw_input('New Group name[Press Enter for default]:')
+        gid = raw_input('Gid[Press Enter for default]:')
+        cmd = 'groupmod {optn} {newname} {optg} {gid} {groupname}'.format(
+            optn='-n' if newname else '', newname=newname,
+            optg='-g' if gid else '', gid=gid, groupname=groupname
+        )
+        cmd = ' '.join(cmd.split())
+        return self.cmd_exe(cmd,
+                            'MSG:Group %s modify succeed.' % (groupname),
+                            'Error:Group %s modify failed.' % (groupname))

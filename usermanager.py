@@ -69,11 +69,11 @@ class UserManager(Manager):
 
     def create(self):
         username = raw_input('Username:')
-        uid = raw_input('Uid:')
-        group = raw_input('Group:')
-        groups = raw_input('Supplementary groups[group1,group2...]:')
-        homedir = raw_input('HomeDir:')
-        createflag = raw_input('Create homedir?[Y/N]')
+        uid = raw_input('Uid[Press Enter for default]:')
+        group = raw_input('Group[Press Enter for default]:')
+        groups = raw_input('Supplementary groups[group1,group2...][Press Enter for default]:')
+        homedir = raw_input('HomeDir[Press Enter for default]:')
+        createflag = raw_input('Create homedir?[Y/N][Press Enter for default]')
         cmd = 'useradd {optu} {uid} {optg} {group} {optG} {groups} {optd} {homedir} {createflag} {username}'.format(
             optu='-u' if uid else '', uid=uid,
             optg='-g' if group else '', group=group,
@@ -85,8 +85,8 @@ class UserManager(Manager):
         cmd = ' '.join(cmd.split())
         # print cmd
         return self.cmd_exe(cmd,
-                                'MSG:User %s create success.' %(username),
-                                'Error:User %s create fail.' %(username))
+                                'MSG:User %s create succeed.' %(username),
+                                'Error:User %s create failed.' %(username))
         # print exe_code
         # if not exe_code:
         #     print 'MSG:User %s create success.' %(username)
@@ -100,20 +100,26 @@ class UserManager(Manager):
             optr='-r' if removeflag.lower() == 'y' else '', username=username
         )
         cmd = ' '.join(cmd.split())
-        exe_code = self.cmd_exe(cmd)
-        print exe_code
-        if not exe_code:
-            print 'MSG:User %s delete success.' %(username)
-        else:
-            print 'Error:User %s delete fail.' %(username)
+        return self.cmd_exe(cmd,
+                             'MSG:User %s delete succeed.' %(username),
+                             'Error:User %s delete failed.' %(username))
+        # exe_code = self.cmd_exe(cmd)
+        # print exe_code
+        # if not exe_code:
+        #     print 'MSG:User %s delete success.' %(username)
+        # else:
+        #     print 'MSG:User %s delete success.' %(username)
 
     def view(self):
         username = raw_input('Username:')
         cmd = 'id {username}'.format(username=username)
-        exe_code = self.cmd_exe(cmd)
-        print exe_code
-        if exe_code:
-            print 'Error:User {} does not exests.'.format(username)
+        return self.cmd_exe(cmd,
+                            'MSG:User %s view succeed.' %(username),
+                            'Error:User %s view failed' %(username))
+        # exe_code = self.cmd_exe(cmd)
+        # print exe_code
+        # if exe_code:
+        #     print 'Error:User {} does not exests.'.format(username)
 
 
     def modify(self):
@@ -122,7 +128,8 @@ class UserManager(Manager):
         group = raw_input('Gid[input the gid/group you want to change or press Enter to skip gid modify]:')
         groups = raw_input('Supplementary groups[group1,group2...]'
                            '[input the groups you want to change or press Enter to skip gtoups modify]:')
-        appendflag = raw_input('Append groups?[Y/N]')
+        if groups:
+            appendflag = raw_input('Append groups?[Y/N]')
         homedir = raw_input('HomeDir[input the homedir you want to change or press Enter to skip homedir modify]:')
         cmd = 'usermod {optu} {uid} {optg} {gid} {appendflag} {optG} {groups} {optd} {homedir} {username}'.format(
             optu='-u' if uid else '', uid=uid,
@@ -133,13 +140,16 @@ class UserManager(Manager):
             username=username
         )
         cmd = ' '.join(cmd.split())
+        return self.cmd_exe(cmd,
+                     'MSG:User %s modify success.' %(username),
+                     'Error:User %s modify fail.' %(username))
         # print cmd
-        exe_code = self.cmd_exe(cmd)
-        print exe_code
-        if not exe_code:
-            print 'MSG:User %s modify success.' %(username)
-        else:
-            print 'Error:User %s modify fail.' %(username)
+        # exe_code = self.cmd_exe(cmd)
+        # print exe_code
+        # if not exe_code:
+        #     print 'MSG:User %s modify success.' %(username)
+        # else:
+        #     print 'Error:User %s modify fail.' %(username)
 
     # def up_return(self):
     #     pass

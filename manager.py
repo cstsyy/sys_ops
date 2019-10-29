@@ -45,7 +45,7 @@ class Manager(object):
     #             print 'Bad choice, try again.'
 
     def cmd_exe(self, cmd, msg='Success', err='Fail'):
-        exe_code =  subprocess.call([cmd], shell=True)
+        exe_code = subprocess.call([cmd], shell=True)
         print exe_code
         if not exe_code:
             print msg
