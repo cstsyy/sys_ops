@@ -42,15 +42,18 @@ class SysManager(Manager):
         while True:
             print self.menu
             choice = str(raw_input('Enter choice:'))
-            try:
-                ops_obj = self.ops_obj_map.get(choice)()
-                return  ops_obj
-            except Exception as e:
-                print e
-                print 'Bad choice, try again.'
+            ops_obj = self.ops_obj_map.get(choice)()
+            return ops_obj
+            # try:
+            #     ops_obj = self.ops_obj_map.get(choice)()
+            #     return ops_obj
+            # except Exception as e:
+            #     print e
+            #     print 'Bad choice, try again.'
 
     # def quit_menu(self):
     #     sys.exit()
+
 
 if __name__ == '__main__':
     mgr_obj = SysManager()

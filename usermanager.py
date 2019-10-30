@@ -3,12 +3,13 @@ from manager import Manager
 
 class UserManager(Manager):
     def __init__(self):
-        user_ops_map = {
-            'c': self.create,
-            'd': self.delete,
-            'm': self.modify
-        }
-        super(UserManager, self).__init__(**user_ops_map)
+        # user_ops_map = {
+        #     'c': self.create,
+        #     'd': self.delete,
+        #     'm': self.modify
+        # }
+        # super(UserManager, self).__init__(**user_ops_map)
+        super(UserManager, self).__init__()
         # self.ops_map = {
         #     'c': self.create,
         #     'd': self.delete,
@@ -84,14 +85,12 @@ class UserManager(Manager):
         )
         cmd = ' '.join(cmd.split())
         # print cmd
-        return self.cmd_exe(cmd,
-                                'MSG:User %s create succeed.' %(username),
-                                'Error:User %s create failed.' %(username))
+        return self.cmd_exe(cmd, 'User', username, 'create')
         # print exe_code
         # if not exe_code:
-        #     print 'MSG:User %s create success.' %(username)
+        #     print 'MSG:User %s create success.' % username
         # else:
-        #     print 'Error:User %s create fail.' %(username)
+        #     print 'Error:User %s create fail.' % username
 
     def delete(self):
         username = raw_input('Username:')
@@ -100,27 +99,22 @@ class UserManager(Manager):
             optr='-r' if removeflag.lower() == 'y' else '', username=username
         )
         cmd = ' '.join(cmd.split())
-        return self.cmd_exe(cmd,
-                             'MSG:User %s delete succeed.' %(username),
-                             'Error:User %s delete failed.' %(username))
+        return self.cmd_exe(cmd, 'User', username, 'delete')
         # exe_code = self.cmd_exe(cmd)
         # print exe_code
         # if not exe_code:
-        #     print 'MSG:User %s delete success.' %(username)
+        #     print 'MSG:User %s delete success.' % username
         # else:
-        #     print 'MSG:User %s delete success.' %(username)
+        #     print 'MSG:User %s delete success.' % username
 
     def view(self):
         username = raw_input('Username:')
         cmd = 'id {username}'.format(username=username)
-        return self.cmd_exe(cmd,
-                            'MSG:User %s view succeed.' %(username),
-                            'Error:User %s view failed' %(username))
+        return self.cmd_exe(cmd, 'User', username, 'view')
         # exe_code = self.cmd_exe(cmd)
         # print exe_code
         # if exe_code:
-        #     print 'Error:User {} does not exests.'.format(username)
-
+        #     print 'Error:User {} does not exests.'.formatusername
 
     def modify(self):
         username = raw_input('Username:')
@@ -140,16 +134,14 @@ class UserManager(Manager):
             username=username
         )
         cmd = ' '.join(cmd.split())
-        return self.cmd_exe(cmd,
-                     'MSG:User %s modify success.' %(username),
-                     'Error:User %s modify fail.' %(username))
+        return self.cmd_exe(cmd, 'User', username, 'modify')
         # print cmd
         # exe_code = self.cmd_exe(cmd)
         # print exe_code
         # if not exe_code:
-        #     print 'MSG:User %s modify success.' %(username)
+        #     print 'MSG:User %s modify success.' % username
         # else:
-        #     print 'Error:User %s modify fail.' %(username)
+        #     print 'Error:User %s modify fail.' % username
 
     # def up_return(self):
     #     pass

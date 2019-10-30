@@ -3,14 +3,13 @@ from manager import Manager
 
 class NetworkManager(Manager):
     def __init__(self):
-        self.ops_map = {
-            'c': 'create',
-            'd': 'delete',
-            'v': 'view',
-            'm': 'modify',
-            'r': 'up_return',
-            'q': self.quit_menu
-        }
+        # net_ops_map = {
+        #     'c': self.create,
+        #     'd': self.delete,
+        #     'm': self.modify,
+        # }
+        # super(NetworkManager, self).__init__(**net_ops_map)
+        super(NetworkManager, self).__init__()
         self.menu = '''
             Choose a operation:
 
@@ -22,3 +21,15 @@ class NetworkManager(Manager):
             (Q)uit
 
             Enter choice:'''
+
+    def create(self):
+        pass
+
+    def delete(self):
+        pass
+
+    def modify(self):
+        pass
+
+    def view(self):
+        pass

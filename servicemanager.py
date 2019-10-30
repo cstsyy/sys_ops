@@ -23,17 +23,43 @@ class ServiceManager(Manager):
 
             Enter choice:'''
 
+    # def result_info_print(self, svc, action):
+    #     return ('MSG:Service {svc} {action} succeed.'.format(svc=svc, action=action),
+    #             'Error:Service {svc} {action} failed.'.format(svc=svc, action=action))
+
     def start(self):
-        pass
+        svc = raw_input('Service name:')
+        cmd = 'systemctl start {svc}'.format(svc=svc)
+        return self.cmd_exe(cmd, 'Service', svc, 'start')
 
     def stop(self):
-        pass
+        svc = raw_input('Service name:')
+        cmd = 'systemctl stop {svc}'.format(svc=svc)
+        return self.cmd_exe(cmd, 'Service', svc, 'stop')
 
     def view(self):
-        pass
+        svc = raw_input('Service name:')
+        cmd = 'systemctl status {svc}'.format(svc=svc)
+        return self.cmd_exe(cmd, 'Service', svc, 'view')
 
     def enable(self):
-        pass
+        svc = raw_input('Service name:')
+        cmd = 'systemctl enable {svc}'.format(svc=svc)
+        return self.cmd_exe(cmd, 'Service', svc, 'enable')
 
     def disable(self):
+        svc = raw_input('Service name:')
+        cmd = 'systemctl disable {svc}'.format(svc=svc)
+        return self.cmd_exe(cmd, 'Service', svc, 'disable')
+
+    def create(self):
+        """Just for init"""
+        pass
+
+    def delete(self):
+        """Just for init"""
+        pass
+
+    def modify(self):
+        """Just for init"""
         pass

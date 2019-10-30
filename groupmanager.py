@@ -3,12 +3,13 @@ from manager import Manager
 
 class GroupManager(Manager):
     def __init__(self):
-        group_ops_map = {
-            'c': self.create,
-            'd': self.delete,
-            'm': self.modify
-        }
-        super(GroupManager, self).__init__(**group_ops_map)
+        # group_ops_map = {
+        #     'c': self.create,
+        #     'd': self.delete,
+        #     'm': self.modify
+        # }
+        # super(GroupManager, self).__init__(**group_ops_map)
+        super(GroupManager, self).__init__()
         self.menu = '''
                 Choose a operation:
     
@@ -28,23 +29,17 @@ class GroupManager(Manager):
             optg='-g' if gid else '', gid=gid, groupname=groupname
         )
         cmd = ' '.join(cmd.split())
-        return self.cmd_exe(cmd,
-                     'MSG:Group %s create succeed.' %(groupname),
-                     'Error:Group %s create failed.' %(groupname))
+        return self.cmd_exe(cmd, 'Group', groupname, 'create')
 
     def delete(self):
         groupname = raw_input('Group name:')
         cmd = 'groupdel {groupname}'.format(groupname=groupname)
-        return self.cmd_exe(cmd,
-                            'MSG:Group %s delete succeed.' %(groupname),
-                            'Error:Group %s delete failed.' %(groupname))
+        return self.cmd_exe(cmd, 'Group', groupname, 'delete')
 
     def view(self):
         groupname = raw_input('Group name:')
         cmd = 'cat /etc/group | grep ^{groupname}:'.format(groupname=groupname)
-        return self.cmd_exe(cmd,
-                            'MSG:Group %s view succeed.' % (groupname),
-                            'Error:Group %s view failed.' % (groupname))
+        return self.cmd_exe(cmd, 'Group', groupname, 'view')
 
     def modify(self):
         groupname = raw_input('Group name[Press Enter for default]:')
@@ -55,6 +50,4 @@ class GroupManager(Manager):
             optg='-g' if gid else '', gid=gid, groupname=groupname
         )
         cmd = ' '.join(cmd.split())
-        return self.cmd_exe(cmd,
-                            'MSG:Group %s modify succeed.' % (groupname),
-                            'Error:Group %s modify failed.' % (groupname))
+        return self.cmd_exe(cmd, 'Group', groupname, 'modify')
