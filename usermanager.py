@@ -69,7 +69,7 @@ class UserManager(Manager):
     #         Enter choice: ''').strip().lower()[0]]
 
     def create(self):
-        username = raw_input('Username:')
+        username = self.must_input('Username:')
         uid = raw_input('Uid[Press Enter for default]:')
         group = raw_input('Group[Press Enter for default]:')
         groups = raw_input('Supplementary groups[group1,group2...][Press Enter for default]:')
@@ -93,7 +93,7 @@ class UserManager(Manager):
         #     print 'Error:User %s create fail.' % username
 
     def delete(self):
-        username = raw_input('Username:')
+        username = self.must_input('Username:')
         removeflag = raw_input('Delete homedir and mail spool?[Y/N]')
         cmd = 'userdel {optr} {username}'.format(
             optr='-r' if removeflag.lower() == 'y' else '', username=username
@@ -108,7 +108,7 @@ class UserManager(Manager):
         #     print 'MSG:User %s delete success.' % username
 
     def view(self):
-        username = raw_input('Username:')
+        username = self.must_input('Username:')
         cmd = 'id {username}'.format(username=username)
         return self.cmd_exe(cmd, 'User', username, 'view')
         # exe_code = self.cmd_exe(cmd)
@@ -117,7 +117,7 @@ class UserManager(Manager):
         #     print 'Error:User {} does not exests.'.formatusername
 
     def modify(self):
-        username = raw_input('Username:')
+        username = self.must_input('Username:')
         uid = raw_input('Uid[input the uid you want to change or press Enter to skip uid modify]:')
         group = raw_input('Gid[input the gid/group you want to change or press Enter to skip gid modify]:')
         groups = raw_input('Supplementary groups[group1,group2...]'

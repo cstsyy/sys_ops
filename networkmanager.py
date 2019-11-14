@@ -23,13 +23,17 @@ class NetworkManager(Manager):
             Enter choice:'''
 
     def create(self):
+        print "Unsupported now."
         pass
 
     def delete(self):
+        print "Unsupported now."
         pass
 
     def modify(self):
+        print "Unsupported now."
         pass
 
     def view(self):
+        print "Unsupported now."
         pass

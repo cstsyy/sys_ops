@@ -2,6 +2,14 @@ import subprocess
 import sys
 
 
+class NotRewriteError(Exception):
+    pass
+
+
+class InvalidInputError(Exception):
+    pass
+
+
 class Manager(object):
     def __init__(self, **kwargs):
         self.ops_map = {
@@ -54,7 +62,7 @@ class Manager(object):
         :return:input
         """
         input_str = None
-        while not None:
+        while not input_str:
             input_str = raw_input(prompt)
         return input_str
 
@@ -90,6 +98,18 @@ class Manager(object):
     #
     # def view(self):
     #     pass
+
+    def create(self):
+        raise NotRewriteError("Must be rewritten in subclasses")
+
+    def delete(self):
+        raise NotRewriteError("Must be rewritten in subclasses")
+
+    def modify(self):
+        raise NotRewriteError("Must be rewritten in subclasses")
+
+    def view(self):
+        raise NotRewriteError("Must be rewritten in subclasses")
 
     def quit_menu(self):
         print "quiting"

@@ -28,38 +28,38 @@ class ServiceManager(Manager):
     #             'Error:Service {svc} {action} failed.'.format(svc=svc, action=action))
 
     def start(self):
-        svc = raw_input('Service name:')
+        svc = self.must_input('Service name:')
         cmd = 'systemctl start {svc}'.format(svc=svc)
         return self.cmd_exe(cmd, 'Service', svc, 'start')
 
     def stop(self):
-        svc = raw_input('Service name:')
+        svc = self.must_input('Service name:')
         cmd = 'systemctl stop {svc}'.format(svc=svc)
         return self.cmd_exe(cmd, 'Service', svc, 'stop')
 
     def view(self):
-        svc = raw_input('Service name:')
+        svc = self.must_input('Service name:')
         cmd = 'systemctl status {svc}'.format(svc=svc)
         return self.cmd_exe(cmd, 'Service', svc, 'view')
 
     def enable(self):
-        svc = raw_input('Service name:')
+        svc = self.must_input('Service name:')
         cmd = 'systemctl enable {svc}'.format(svc=svc)
         return self.cmd_exe(cmd, 'Service', svc, 'enable')
 
     def disable(self):
-        svc = raw_input('Service name:')
+        svc = self.must_input('Service name:')
         cmd = 'systemctl disable {svc}'.format(svc=svc)
         return self.cmd_exe(cmd, 'Service', svc, 'disable')
 
-    def create(self):
-        """Just for init"""
-        pass
-
-    def delete(self):
-        """Just for init"""
-        pass
-
-    def modify(self):
-        """Just for init"""
-        pass
+    # def create(self):
+    #     """Just for init"""
+    #     pass
+    #
+    # def delete(self):
+    #     """Just for init"""
+    #     pass
+    #
+    # def modify(self):
+    #     """Just for init"""
+    #     pass
